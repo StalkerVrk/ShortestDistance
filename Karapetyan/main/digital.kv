@@ -1,0 +1,256 @@
+<Digt>:
+    MDScreen:
+        id: Hellow
+        name: "Hellwo"
+        BoxLayout:
+            orientation: 'vertical'
+            MDToolbar:
+                id: toolbar_Hellow
+                md_bg_color: .945,.937,.94,.7
+                height:'30dp'
+                pos_hint: {"top": 1}
+                elevation: 10
+                title: "ShortMap"
+                specific_text_color: .55, .32, .61, .96
+            MDBottomNavigation:
+                text_color_active: .55, .32, .61, .96
+                text_color_normal: .945,.937,.94,.7
+                panel_color:[0.2980392156862745, 0.2823529411764706, 0.32941176470588235, 1]
+                halign: "start"
+                MDBottomNavigationItem:
+                    id: Screen_Hellow
+                    name: "Screen_Hellow"
+                    text: "Inf"
+                    icon: 'information'
+                    FitImage:
+                        source: "Karapetyan\image\Dracula.jpg"
+                    BoxLayout:
+                        padding: dp(20)
+                        spacing: dp(10)
+                        orientation: 'vertical'
+                        BoxLayout:
+                            size_hint_y: 0.2
+                            height: self.minimum_height
+                            padding: dp(20)
+                            spacing: dp(20)
+                            pos_hint: {"center_x": .5, "center_y": .5}
+                            MDLabel:
+                                text: "Добро пожаловать! \n Данная программа предназначена для проверки кратчайшего маршрута"
+                                halign: "center"
+                                front_style: "Button"
+                                canvas.before:
+                                    Color:
+                                        rgba: (0, 0, 0, 0.3)
+                                    Rectangle:
+                                        pos: self.pos
+                                        size: self.size
+                        BoxLayout:
+                            padding: dp(20)
+                            spacing: dp(10)
+                            BoxLayout:
+                                spacing: dp(5)
+                                size_hint_x: .4
+                                orientation:'vertical'
+                                canvas.before:
+                                    Color:
+                                        rgba: (0, 0, 0, 0.05)
+                                    Rectangle:
+                                        pos: self.pos
+                                        size: self.size
+                                MDLabel:
+                                    id: Instraction
+                                    text: "Вводи значения"
+                                    halign: "center"
+                                    front_style: "Body1"
+                                    canvas.before:
+                                        Color:
+                                            rgba: (0, 0, 0, 0.08)
+                                        Rectangle:
+                                            pos: self.pos
+                                            size: self.size
+                                MDTextField:
+                                    id: startingPositionK
+                                    hint_text:'Начальная точка'
+                                    line_color_focus: 1, 1, 1, 1
+                                    line_color_normal: 0, 0, 0, 1
+                                MDTextField:
+                                    id: finalPositionK
+                                    hint_text:'Конечная точка'
+                                    line_color_focus: 1, 1, 1, 1
+                                    line_color_normal: 0, 0, 0, 1
+                                MDTextField:
+                                    id: pathToValuesK
+                                    hint_text:'Путь к значениям'
+                                    line_color_focus: 1, 1, 1, 1
+                                    line_color_normal: 0, 0, 0, 1
+                                    helper_text: "Для готовых данных"
+                                    helper_text_mode: "persistent"
+                                MDRaisedButton:
+                                    text: "Вывести данные"
+                                    md_bg_color: .147, .66, .70, .1
+                                    pos_hint: {"center_x": .5}
+                                    id: getDataInTab
+                                    on_release:
+                                        app.getValuesWhithDataInTab(tabReadyValuesK)
+                                MDRaisedButton:
+                                    text: "Построить"
+                                    md_bg_color: .147, .66, .70, .1
+                                    pos_hint: {"center_x": .5}
+                                    id: StartTochki
+                                    on_release:
+                                        app.getValuesStarEndPos()
+                                        app.startBuildTree()
+                                        app.getImgTree(imageTree)
+                                        app.getLabelTime(TimeTxtLable)
+                                        app.getTextTwoScreen()
+                                        app.calculateNumbersForSaveImg()
+                            BoxLayout:
+                                spacing: dp(10)
+                                size_hint_x: .4
+                                orientation:'vertical'
+                                canvas.before:
+                                    Color:
+                                        rgba: (0, 0, 0, 0.05)
+                                    Rectangle:
+                                        pos: self.pos
+                                        size: self.size
+                                MDTextField:
+                                    id: locationOTK
+                                    hint_text: "Место от"
+                                    line_color_focus: 1, 1, 1, 1
+                                    line_color_normal: 0, 0, 0, 1
+                                MDTextField:
+                                    id: locationDOK
+                                    hint_text: "Место до"
+                                    line_color_focus: 1, 1, 1, 1
+                                    line_color_normal: 0, 0, 0, 1
+                                MDTextField:
+                                    id: timeK
+                                    hint_text: "Время"
+                                    line_color_focus: 1, 1, 1, 1
+                                    line_color_normal: 0, 0, 0, 1
+                                MDRaisedButton:
+                                    text: "Добавить"
+                                    md_bg_color: .147, .66, .70, .1
+                                    pos_hint: {"center_x": .5}
+                                    id: addInProgrammData
+                                    on_release:
+                                        app.getTxtMainScr()
+                                        app.addTabReadyValues(tabReadyValuesK)
+                                MDTextField:
+                                    id: nameSave
+                                    hint_text: "Name save"
+                                    line_color_focus: 1, 1, 1, 1
+                                    line_color_normal: 0, 0, 0, 1
+                                MDRaisedButton:
+                                    text: "Сохранить данные"
+                                    md_bg_color: .147, .66, .70, .1
+                                    pos_hint: {"center_x": .5}
+                                    id: saveData
+                                    on_release:
+                                        app.saveData()
+                                MDLabel:
+                                    id: notification
+                                    halign: "center"
+                                    text: ""
+                                    front_style: "Body1"
+                                    canvas.before:
+                                        Color:
+                                            rgba: (0, 0, 0, 0.1)
+                                        Rectangle:
+                                            pos: self.pos
+                                            size: self.size
+                            BoxLayout:
+                                spacing: dp(10)
+                                size_hint_x: .4
+                                orientation:'vertical'
+                                canvas.before:
+                                    Color:
+                                        rgba: (0, 0, 0, 0.05)
+                                    Rectangle:
+                                        pos: self.pos
+                                        size: self.size
+                                MDTextField:
+                                    id: passLoadDataOne
+                                    hint_text: "Путь для объединения"
+                                    line_color_focus: 1, 1, 1, 1
+                                    line_color_normal: 0, 0, 0, 1
+                                MDTextField:
+                                    id: passLoadDataTwo
+                                    hint_text: "Путь для объединения"
+                                    line_color_focus: 1, 1, 1, 1
+                                    line_color_normal: 0, 0, 0, 1
+                                MDRaisedButton:
+                                    text: "Объеденить и вывести"
+                                    md_bg_color: .147, .66, .70, .1
+                                    pos_hint: {"center_x": .5}
+                                    id: joinDataOneTwo
+                                    on_release:
+                                        app.combiningArray(tabReadyValuesK)
+                            BoxLayout:
+                                spacing: dp(10)
+                                MDTextField:
+                                    id:tabReadyValuesK
+                                    hint_text:'Значения'
+                                    line_color_focus: 1, 1, 1, 1
+                                    line_color_normal: 0, 0, 0, 1
+                                    fill_color: .03, .65, .85, .2
+                                    mode: "fill"
+                                    multiline: True
+                                    max_height: "300dp"
+                MDBottomNavigationItem:
+                    id: Start
+                    name: "Sceen_Start"
+                    text: "Start"
+                    icon: 'alpha-e-circle-outline'
+                    FitImage:
+                        source: "Karapetyan\image\Shroom Haze.jpg"
+                    BoxLayout:
+                        spacing:10
+                        BoxLayout:
+                            orientation:'vertical'
+                            size_hint_x: .4
+                            padding: dp(20)
+                            spacing: dp(20)
+                            MDLabel:
+                                id: TimeTxtLable
+                                text:'Время: '
+                                line_color_focus: 1, 1, 1, 1
+                                line_color_normal: 0, 0, 0, 1
+                                fill_color: .03, .65, .85, .2
+                            MDLabel:
+                                id: numberPosForTwoScreen
+                                text:'Количество маршрутов: '
+                                line_color_focus: 1, 1, 1, 1
+                                line_color_normal: 0, 0, 0, 1
+                                fill_color: .03, .65, .85, .2
+                            MDLabel:
+                                id: goPosForTwoScreen
+                                text:'Пройти: '
+                                line_color_focus: 1, 1, 1, 1
+                                line_color_normal: 0, 0, 0, 1
+                                fill_color: .03, .65, .85, .2
+                            MDLabel:
+                                id: startPosForTwoScreen
+                                text:'Начальная точка: '
+                                line_color_focus: 1, 1, 1, 1
+                                line_color_normal: 0, 0, 0, 1
+                                fill_color: .03, .65, .85, .2
+                            MDLabel:
+                                id: endPosForTwoScreen
+                                text:'Конечная точка: '
+                                line_color_focus: 1, 1, 1, 1
+                                line_color_normal: 0, 0, 0, 1
+                                fill_color: .03, .65, .85, .2   
+                        BoxLayout:
+                            orientation:'vertical'
+                            Image:
+                                id: imageTree
+                                
+                                canvas.before:
+                                    Color:
+                                        rgba: (0, 0, 0, 0.1)
+                                    Rectangle:
+                                        pos: self.pos
+                                        size: self.size
+                                source: ""                 
